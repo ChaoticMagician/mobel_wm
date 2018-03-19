@@ -1,23 +1,38 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <li-head></li-head>
+    <ul id="listfir">
+      <router-link class="listfirLi"
+       :to="{ path: '/shangpin'}" 
+        tag="li"
+        linkArr>商品</router-link>
+      <router-link class="listfirLi" :to="{ path: '/pinglun'}"  tag="li">评论</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangjia'}"  tag="li">商家</router-link>
+    </ul>
+    <router-view></router-view>
+    <div>这里是底部</div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+import liHead from '@/components/head/lihead.vue'
+  export default {
+  name:'app',
+  components:{
+    liHead
+}
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+#listfir{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+.listfirLi{
+    flex: 1;
+    text-align: center;
 }
 </style>
