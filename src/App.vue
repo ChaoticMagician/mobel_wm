@@ -2,15 +2,11 @@
   <div>
     <li-head></li-head>
     <ul id="listfir">
-      <router-link class="listfirLi"
-       :to="{ path: '/shangpin'}" 
-        tag="li"
-        linkArr>商品</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangpin'}" tag="li">商品</router-link>
       <router-link class="listfirLi" :to="{ path: '/pinglun'}"  tag="li">评论</router-link>
-      <router-link class="listfirLi" :to="{ path: '/shangjia'}"  tag="li">商家</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangjia'}" tag="li">商家</router-link>
     </ul>
     <router-view></router-view>
-    <div>这里是底部</div>
   </div>
 </template>
 
@@ -34,5 +30,10 @@ import liHead from '@/components/head/lihead.vue'
 .listfirLi{
     flex: 1;
     text-align: center;
+    font-size: 1em;
+}
+.router-link-active{
+
+    color: orange;
 }
 </style>

@@ -1,15 +1,79 @@
 <template>
   <div>
-    测试组件2
+    <table class="booktable">
+      <tr>
+        <th>{{booklisthead.bookcode}}</th>
+        <th>{{booklisthead.bookname}}</th>
+        <th>{{booklisthead.edition}}</th>
+        <th>{{booklisthead.pricing}}</th>
+        <th>{{booklisthead.author}}</th>
+        <th>{{booklisthead.press}}</th>
+        <th>{{booklisthead.publicationtime}}</th>
+      </tr>
+      <tr v-for="book,index in booklist" key="index">
+        <td>{{book.bookcode}}</td>
+        <td>{{book.bookname}}</td>
+        <td>{{book.edition}}</td>
+        <td>{{book.pricing}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.press}}</td>
+        <td>{{book.publicationtime}}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
 export default {
-  name:"test"
-}
+  name: "test",
+  created:function(){
+    this.$http.get('http://localhost:8080/study/book/' ,{
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+            // 这里有问题
+        }
+    }).then(
+      (res)=>{
+        booklisthead = res.data
+      },(err)=>{
+        console.log(err)
+      }
+    )
+  },
+  data() {
+    return {
+      booklisthead: {
+        id: "编号",
+        bookcode: "图书编号",
+        bookname: "图书名称",
+        edition: "版次",
+        pricing: "定价",
+        author: "作者",
+        press: "出版社",
+        publicationtime: "出版时间"
+      },
+      booklist: []
+        
+    };
+  }
+};
 </script>
 
 <style scoped>
+.booktable {
+  display: inline-block;
+  padding: 20px auto;
 
+}
+.booktable th{
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid white;
+  padding: 0 7px 0 7px;
+  font-weight: 500;
+  font-size: 20px;
+  background: rgb(126, 248, 146);
+
+}
 </style>
