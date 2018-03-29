@@ -9,6 +9,7 @@
         <th>{{booklisthead.author}}</th>
         <th>{{booklisthead.press}}</th>
         <th>{{booklisthead.publicationtime}}</th>
+        <th>{{booklisthead.active}}</th>
       </tr>
       <tr v-for="book,index in booklist" key="index">
         <td>{{book.bookcode}}</td>
@@ -18,6 +19,10 @@
         <td>{{book.author}}</td>
         <td>{{book.press}}</td>
         <td>{{book.publicationtime}}</td>
+        <td>
+          <button >删除</button>
+          <button >修改</button>
+        </td>
       </tr>
     </table>
   </div>
@@ -28,14 +33,14 @@ export default {
   name: "test",
   created:function(){
     this.$http.get('http://localhost:8080/study/book/' ,{
-        headers: {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*"
-            // 这里有问题
-        }
+        // headers: {
+        //     'Content-Type': 'application/json',
+        //     "Access-Control-Allow-Origin": "*"
+        //     // 这里有问题
+        // }
     }).then(
       (res)=>{
-        booklisthead = res.data
+        this.booklist = res.data
       },(err)=>{
         console.log(err)
       }
@@ -51,7 +56,8 @@ export default {
         pricing: "定价",
         author: "作者",
         press: "出版社",
-        publicationtime: "出版时间"
+        publicationtime: "出版时间",
+        active: "操作"
       },
       booklist: []
         
@@ -73,7 +79,19 @@ export default {
   padding: 0 7px 0 7px;
   font-weight: 500;
   font-size: 20px;
+  text-align: center;
   background: rgb(126, 248, 146);
+
+}
+.booktable td{
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid rgb(190, 190, 190);
+  padding: 0 7px 0 7px;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  /* background: rgb(126, 248, 146); */
 
 }
 </style>

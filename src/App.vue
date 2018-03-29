@@ -2,9 +2,9 @@
   <div>
     <li-head></li-head>
     <ul id="listfir">
-      <router-link class="listfirLi" :to="{ path: '/shangpin'}" tag="li">商品</router-link>
-      <router-link class="listfirLi" :to="{ path: '/pinglun'}"  tag="li">评论</router-link>
-      <router-link class="listfirLi" :to="{ path: '/shangjia'}" tag="li">商家</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangpin'}" tag="li">添加书籍</router-link>
+      <router-link class="listfirLi" :to="{ path: '/pinglun'}"  tag="li">书籍列表</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangjia'}" tag="li">信息修改</router-link>
     </ul>
     <router-view></router-view>
   </div>
