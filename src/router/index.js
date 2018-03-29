@@ -10,17 +10,17 @@ export default new Router({
   routes: [
     {
       path: '/shangpin',
-      name: 'base',
+      name: 'shangpin',
       component: shangpin
     },
     {
       path: '/pinglun',
-      name: 'base',
+      name: 'pinglun',
       component: pinglun
     },
     {
-      path: '/shangjia',
-      name: 'base',
+      path: '/shangjia/:id',
+      name: 'shangjia',
       component: shangjia
     }
   ]

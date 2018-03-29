@@ -11,7 +11,7 @@
         <th>{{booklisthead.publicationtime}}</th>
         <th>{{booklisthead.active}}</th>
       </tr>
-      <tr v-for="book,index in booklist" key="index">
+      <tr v-for="book,index in booklist" :key="index">
         <td>{{book.bookcode}}</td>
         <td>{{book.bookname}}</td>
         <td>{{book.edition}}</td>
@@ -20,8 +20,8 @@
         <td>{{book.press}}</td>
         <td>{{book.publicationtime}}</td>
         <td>
-          <button >删除</button>
-          <button >修改</button>
+          <button  @click="delectbook(book.id, $event)">删除</button>
+          <button  @click="chancebook(book.id, $event)">修改</button>
         </td>
       </tr>
     </table>
@@ -32,19 +32,7 @@
 export default {
   name: "test",
   created:function(){
-    this.$http.get('http://localhost:8080/study/book/' ,{
-        // headers: {
-        //     'Content-Type': 'application/json',
-        //     "Access-Control-Allow-Origin": "*"
-        //     // 这里有问题
-        // }
-    }).then(
-      (res)=>{
-        this.booklist = res.data
-      },(err)=>{
-        console.log(err)
-      }
-    )
+    this.$options.methods.getbooklist.bind(this)()
   },
   data() {
     return {
@@ -62,6 +50,45 @@ export default {
       booklist: []
         
     };
+  },
+  methods: {
+    getbooklist: function(){
+
+      this.$http.get('http://localhost:8080/study/book/' ,{
+          // headers: {
+          //     'Content-Type': 'application/json',
+          //     "Access-Control-Allow-Origin": "*"
+          //     // 这里有问题
+          // }
+      }).then(
+        (res)=>{
+          this.booklist = res.data
+        },(err)=>{
+          console.log(err)
+        }
+      )
+
+    },
+    delectbook: function(bookid,event){
+      let url = 'http://localhost:8080/study/book/'+bookid
+      this.$http.delete(url ,{
+          // headers: {
+          //     'Content-Type': 'application/json',
+          //     "Access-Control-Allow-Origin": "*"
+          //     // 这里有问题
+          // }
+      }).then(
+        (res)=>{
+          this.$options.methods.getbooklist.bind(this)()
+        },(err)=>{
+          console.log(err)
+        }
+      )
+    },
+    chancebook: function(bookid,event){
+      let urlgo = '/shangjia/'+bookid
+       this.$router.push({ path: urlgo});
+    }
   }
 };
 </script>

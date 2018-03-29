@@ -4,7 +4,7 @@
     <ul id="listfir">
       <router-link class="listfirLi" :to="{ path: '/shangpin'}" tag="li">添加书籍</router-link>
       <router-link class="listfirLi" :to="{ path: '/pinglun'}"  tag="li">书籍列表</router-link>
-      <router-link class="listfirLi" :to="{ path: '/shangjia'}" tag="li">信息修改</router-link>
+      <router-link class="listfirLi" :to="{ path: '/shangjia/2'}" tag="li">信息修改</router-link>
     </ul>
     <router-view></router-view>
   </div>
@@ -33,7 +33,6 @@ import liHead from '@/components/head/lihead.vue'
     font-size: 1em;
 }
 .router-link-active{
-
     color: orange;
 }
 </style>
