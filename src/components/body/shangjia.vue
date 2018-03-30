@@ -2,10 +2,10 @@
   <div>
     <table  v-for="tiem,key,index in booklisthead"  :key="index">
       <tr  v-if="!index == 0">
-         <td class="booklabel" ><label>{{tiem}}:</label></td><td class="bookinput" ><input v-model="bookdata[key]" :placeholder="booktishi[key]"></td>
+         <td class="booklabel" ><label>{{tiem}}:</label></td><td class="bookinput" ><input v-model="Cbookdata[key]" :placeholder="booktishi[key]"></td>
       </tr>
     </table>
-    <button @click="chacebook" >确定创建</button>
+    <button @click="chacebook" >确定修改id为{{bookID}}的book？</button>
   </div>
 </template>
 
@@ -13,11 +13,24 @@
 export default {
   name:"test",
   created:function(){
-    
+     this.$http.get('http://localhost:8080/study/book/'+this.bookID
+          // headers: {
+          //     'Content-Type': 'application/json',
+          //     "Access-Control-Allow-Origin": "*"
+          //     // 这里有问题
+          // }
+      ).then(
+        (res)=>{
+          this.Cbookdata = res.data
+        },(err)=>{
+          console.log(err)
+        }
+      )
   },
   data (){
     return{
-        booklisthead: {
+      bookID: this.$route.params.id,
+      booklisthead: {
         id: "编号",
         bookcode: "图书编号",
         bookname: "图书名称",
@@ -27,7 +40,7 @@ export default {
         press: "出版社",
         publicationtime: "出版时间"
       },
-       bookdata: {
+       Cbookdata: {
         id: "",
         bookcode: "",
         bookname: "",
@@ -52,7 +65,7 @@ export default {
   methods: {
     chacebook:function(){
       this.$http.put('http://localhost:8080/study/book/',
-       this.bookdata
+       this.Cbookdata
           // headers: {
           //     'Content-Type': 'application/json',
           //     "Access-Control-Allow-Origin": "*"
@@ -60,7 +73,7 @@ export default {
           // }
       ).then(
         (res)=>{
-          console.log(res)
+       this.$router.push({ path: '/pinglun'});
         },(err)=>{
           console.log(err)
         }

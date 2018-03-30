@@ -57,7 +57,7 @@ export default {
           // }
       ).then(
         (res)=>{
-          console.log(res)
+          this.$router.push({ path:'/pinglun'});
         },(err)=>{
           console.log(err)
         }
